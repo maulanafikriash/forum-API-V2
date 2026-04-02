@@ -37,8 +37,8 @@ class GetThreadUseCaseUseCase {
 
         return new CommentDetails({
           ...comment,
+          likeCount,
           replies: formattedReplies,
-          likeCount: likeCount || 0,
         });
       }),
     );

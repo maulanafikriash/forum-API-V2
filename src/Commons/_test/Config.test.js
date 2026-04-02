@@ -36,4 +36,19 @@ describe('config', () => {
     expect(config.app.port).toBe('5000');
     expect(config.database.host).toBe('localhost');
   });
+
+  it('should set database config using DATABASE_URL when provided (e.g. Supabase)', async () => {
+    vi.stubEnv('DATABASE_URL', 'postgres://user:pass@host:5432/db');
+    const { default: config } = await import('../config.js');
+
+    expect(config.database).toHaveProperty('url');
+    expect(config.database.url).toBe('postgres://user:pass@host:5432/db');
+  });
+
+  it('should set empty debug object when NODE_ENV is not development', async () => {
+    vi.stubEnv('NODE_ENV', 'production');
+    const { default: config } = await import('../config.js');
+
+    expect(config.app.debug).toEqual({});
+  });
 });
