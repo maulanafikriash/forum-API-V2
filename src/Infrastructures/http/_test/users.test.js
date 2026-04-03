@@ -138,4 +138,16 @@ describe('/users endpoint', () => {
       expect(response.body.data).toEqual('Hello world!');
     });
   });
+  // Test Case
+  describe('when GET /country', () => {
+    it('should return 200 and hello world', async () => {
+    // Arrange
+      const app = await createServer({});
+      // Action
+      const response = await request(app).get('/country');
+      // Assert
+      expect(response.status).toEqual(200);
+      expect(response.body.data).toEqual('Hello indonesia!');
+    });
+  });
 });
