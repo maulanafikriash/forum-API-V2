@@ -18,6 +18,10 @@ const createServer = async (container) => {
   // public routes
   app.use('/users', users(container));
   app.use('/authentications', authentications(container));
+  // Test Case
+  app.get('/', (req, res) => {
+    res.status(200).json({ data: 'Hello world!' });
+  });
 
   // threads
   app.use('/', threads(container));
